@@ -1,0 +1,17 @@
+runs/
+*.pt
+*.pth
+*.ckpt
+events.out.tfevents.*
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.idea/
+.vscode/
+test_videos/
+train_videos/
+trajectory.*
+*.log
+!results/*.csv
+!results/*.md

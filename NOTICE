@@ -1,0 +1,12 @@
+This repository contains experiment code derived from the ManiSkill PPO
+baselines and extended for the StackCube visual PPO ablation project.
+
+Upstream project: https://github.com/haosulab/ManiSkill
+Reference commit: 42b68244c1497cef889b04c4f4a78aa01c927f4e
+Upstream license: Apache License 2.0
+
+The experiment-specific modifications include observation information
+boundaries, asymmetric Actor-Critic networks, camera-specific encoders,
+frame stacking, running normalization, auxiliary state prediction, Beta
+policies, temporal CAPS, Actor-DrAC, gSDE diagnostics, NoEarlyReset training,
+evaluation instrumentation, and regression tests.

@@ -1,0 +1,28 @@
+stage,experiment,train_seed_count,eval_episodes_per_train_seed,success_once_pct,success_at_end_pct,return_mean,status,note
+reference,S0-10M,1,300,54.33,32.67,32.219,complete,state-only 10M
+reference,S0-25M,1,300,67.33,46.33,34.196,complete,non-matched 25M budget
+reference,V0-privileged,1,300,73.33,63.00,34.077,complete,actor sees full object state
+base,P0,1,300,44.7,30.0,32.50,complete,RGB only
+base,B0,1,300,21.3,4.0,31.85,complete,RGB plus raw proprio
+architecture,B1,1,300,79.0,46.7,35.31,complete,privileged critic
+architecture,B2,1,300,65.3,16.3,32.46,complete,separate camera CNNs
+architecture,B3,1,300,61.3,19.0,32.63,complete,four-frame stack
+architecture,B4,1,300,54.7,35.7,32.21,complete,auxiliary privileged-state head
+normalization,B0-Norm,1,300,73.0,63.3,35.25,complete,proprio normalization
+normalization,B1-Norm,1,300,68.3,32.0,33.58,complete,actor and critic state normalization
+normalization,B2-Norm,1,300,65.7,34.0,33.04,complete,normalized B2
+normalization,B3-Norm,1,300,62.0,41.0,32.87,complete,normalized B3
+normalization,B4-Norm-seed1,1,300,84.0,68.0,37.57,complete,main single-seed control
+diagnostic,B1-ActorNorm,1,300,49.3,41.0,31.99,complete,actor-only normalization
+diagnostic,B1-CriticNorm,1,0,,,,result-not-archived,implementation and run prepared
+ppo_ablation,B4-Norm-AnnealLR,1,300,83.7,65.0,37.30,complete,linear LR annealing
+ppo_ablation,B4-Norm-BetaPPO,1,300,53.3,1.3,31.87,complete,bounded Beta policy
+ppo_ablation,B4-Norm-TCAPS,1,300,89.3,67.0,38.35,complete,temporal coefficient 0.1
+ppo_ablation,B4-Norm-DrAC-Photo,1,300,0.0,0.0,0.49,complete,failed training
+termination,B4-Norm-NoEarlyReset-seed1,1,300,88.7,82.3,38.01,complete,no early termination
+combination,NoEarlyReset-TCAPS,1,300,87.3,77.3,37.49,complete,negative interaction
+combination,NoEarlyReset-TCAPS-PreSuccess,1,300,86.0,79.3,37.55,complete,TCAPS disabled after first success
+negative,B0-Norm-gSDE,1,300,0.0,0.0,24.62,complete,effective exploration std exploded
+negative,B4-Norm-Gamma095,1,300,10.0,4.0,33.51,complete,credit assignment degradation
+multiseed,B4-Norm,3,300,65.7,40.1,34.99,complete,std once/end/return = 23.9pp/34.6pp/2.57
+multiseed,B4-Norm-NoEarlyReset,3,300,85.1,77.1,36.82,complete,std once/end/return = 4.8pp/5.7pp/1.18
