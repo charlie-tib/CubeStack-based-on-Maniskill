@@ -4,6 +4,16 @@
 
 最终方案没有继续堆叠 reward trick，而是定位到一个更根本的问题：原训练在首次成功时立即 reset，但评估要求策略在固定 50 步时域结束时仍保持成功。仅将训练改为 `NoEarlyReset`，就在 3 个独立训练 seed 上同时提高了平均性能并大幅降低方差。
 
+## Demo
+
+[![Franka Panda 视觉 PPO 堆叠演示：8 个连续完整回合](assets/cubestack_demo.gif)](https://github.com/charlie-tib/CubeStack-based-on-Maniskill/blob/main/assets/cubestack_demo.mp4)
+
+[播放 / 下载完整 MP4](https://github.com/charlie-tib/CubeStack-based-on-Maniskill/raw/refs/heads/main/assets/cubestack_demo.mp4)
+
+2026-10-18 在 RTX 5090 上按最终方案 `B4-Norm + NoEarlyReset` 重训：训练 seed 为 `1`，实际训练 **9,984,000 steps**。视频展示评估 seed `404` 的 **8 个连续完整回合**，不筛选片段，全部终局成功；以 **0.5×** 速度播放，便于观察抓取、堆叠与释放过程。
+
+该次重训另在评估 seeds `101/202/303` 上各运行 100 回合，终局成功率分别为 **81% / 81% / 78%**，合计 **80%**（300 回合）。这是一次独立的单训练 seed 重跑，不替代下方历史三训练 seed 的统计结果；演示的 8/8 也不作为整体成功率。
+
 ## 核心结果
 
 每个训练 seed 使用评估 seeds `101/202/303`，每个评估 seed 运行 100 episodes，因此每种方法共计 900 个最终评估 episodes。
@@ -196,7 +206,7 @@ results/summary.csv               # 已完成实验的结构化结果
 docs/EXPERIMENT_LOG.md            # 全部实验过程、失败分析与结论
 ```
 
-模型 checkpoint、TensorBoard event 和视频体积较大，不提交到 Git；运行后统一写入 `runs/`。
+模型 checkpoint、TensorBoard event 和原始录制默认写入 `runs/`，不提交到 Git；主页演示用的 MP4 与 GIF 单独保存在 `assets/`。
 
 ## 局限性
 
